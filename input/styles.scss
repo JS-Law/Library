@@ -1,4 +1,41 @@
-.book{
-    border: 2px solid black;
-    margin: 2%;
+@font-face {
+    font-family: 'Inter';
+    src: url(../assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf);
+}
+
+
+
+$primary-font: 'Inter';
+
+body, html{
+    box-sizing: border-box;
+    margin: 0;
+    height: 100vh;
+}
+nav#nav-bar{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    button{
+        height:25px
+    }
+}
+#books{
+    display: grid;
+    grid-template-rows: 50px repeat(16, 1fr);
+    grid-template-columns: 50px repeat(16, 1fr);
+    height: 100vh;
+    .book{
+        align-items: center;
+        display: flex;
+        padding: 1rem;
+        border: 2px solid black;
+        font-family: $primary-font;
+        font-size: .7rem;
+        text-align: start;
+        
+        .removeButton{
+            font-size: .7rem;
+        }
+    }
 }
