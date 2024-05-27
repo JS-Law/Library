@@ -52,10 +52,10 @@ function Book(name, author, pages, status){
 }
 
 
-
 function addBookToLibrary(book){
     library.push(book);
 }
+
 
 
 addBookToLibrary(placeHolder);
@@ -109,6 +109,8 @@ library.forEach(bookTitle => {
     removeBookBtn.className = 'removeButton';
     removeBookBtn.textContent = "Remove Book";
     removeBookBtn.style.gridColumn = '16 / 17'; // Span the last column
+    removeBookBtn.onclick = () => newBook.remove(); // Add functionality to remove book
+    
 
     booksContainer.appendChild(newBook);
     newBook.appendChild(title);
@@ -118,3 +120,83 @@ library.forEach(bookTitle => {
     newBook.appendChild(removeBookBtn);
 });
 
+
+const addBookBtn = document.querySelector('#add-new-book');
+const addBookForm = document.querySelector('#addBookForm');
+const submitBookBtn = document.querySelector('#submitBookBtn');
+
+addBookBtn.addEventListener('click', () => {
+    addBookForm.style.display = 'block';
+});
+
+submitBookBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const bookTitle = document.querySelector('#bookTitle').value;
+    const bookAuthor = document.querySelector('#bookAuthor').value;
+    const bookPages = document.querySelector('#bookPages').value;
+    const bookStatus = document.querySelector('#bookStatus').value;
+
+    if (bookTitle && bookAuthor && bookPages && bookStatus) {
+        let newBook = new Book(bookTitle, bookAuthor, bookPages, bookStatus);
+        addBookToLibrary(newBook);
+
+        let newBookElement = document.createElement('div');
+        newBookElement.className = 'book';
+        newBookElement.id = `book-${bookNum++}`;
+        newBookElement.style.gridRow = rowStart++;
+        newBookElement.style.gridColumn = '2 / 17'; // Span full width of booksContainer
+        newBookElement.style.display = 'grid';
+        newBookElement.style.gridTemplateColumns = 'repeat(16, 1fr)'; // 16 columns within each book
+
+        let title = document.createElement('div');
+        title.className = 'title';
+        title.id = `title-${titleId++}`;
+        title.textContent = bookTitle;
+        title.style.gridColumn = '4 / 8'; // Span columns 4 to 7
+        title.style.gridRow = '1';
+
+        let author = document.createElement('div');
+        author.className = 'author';
+        author.id = `author-${authorId++}`;
+        author.textContent = bookAuthor;
+        author.style.gridColumn = '1 / 4'; // Span columns 1 to 3   
+        author.style.gridRow = '1';
+
+        let pageCount = document.createElement('div');
+        pageCount.className = 'page-count';
+        pageCount.id = `page-count-${pageCountId++}`;
+        pageCount.textContent = bookPages;
+        pageCount.style.gridColumn = '8 / 12'; // Span columns 8 to 11
+        pageCount.style.gridRow = '1';
+
+        let status = document.createElement('div');
+        status.className = 'status';
+        status.id = `status-${statusId++}`;
+        status.textContent = bookStatus;
+        status.style.gridColumn = '12 / 16'; // Span columns 12 to 15
+        status.style.gridRow = '1';
+
+        let removeBookBtn = document.createElement('button');
+        removeBookBtn.id = `Btn-${removeBookBtnId++}`;
+        removeBookBtn.className = 'removeButton';
+        removeBookBtn.textContent = "Remove Book";
+        removeBookBtn.style.gridColumn = '16 / 17'; // Span the last column
+        removeBookBtn.onclick = () => newBookElement.remove(); // Add functionality to remove book
+
+        booksContainer.appendChild(newBookElement);
+        newBookElement.appendChild(title);
+        newBookElement.appendChild(author);
+        newBookElement.appendChild(pageCount);
+        newBookElement.appendChild(status);
+        newBookElement.appendChild(removeBookBtn);
+
+        // Clear the form
+        document.querySelector('#bookTitle').value = '';
+        document.querySelector('#bookAuthor').value = '';
+        document.querySelector('#bookPages').value = '';
+        document.querySelector('#bookStatus').value = '';
+        addBookForm.style.display = 'none';
+    } else {
+        alert('Please fill in all fields');
+    }
+});
