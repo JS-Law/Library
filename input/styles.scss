@@ -25,6 +25,7 @@ nav#nav-bar{
     grid-template-rows: 50px repeat(16, 1fr);
     grid-template-columns: 50px repeat(16, 1fr);
     height: 100vh;
+    gap: 10px;
     .book{
         align-items: center;
         display: flex;
@@ -33,7 +34,6 @@ nav#nav-bar{
         font-family: $primary-font;
         font-size: .7rem;
         text-align: start;
-        
         .removeButton{
             font-size: .7rem;
         }
