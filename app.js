@@ -60,12 +60,7 @@ function addBookToLibrary(book){
 
 
 addBookToLibrary(placeHolder);
-addBookToLibrary(placeHolder2);
-addBookToLibrary(placeHolder2);
-addBookToLibrary(placeHolder2);
-addBookToLibrary(placeHolder2);
-addBookToLibrary(placeHolder2);
-addBookToLibrary(placeHolder2);
+
 
 library.forEach(bookTitle => {
     let newBook = document.createElement('div');
@@ -133,7 +128,7 @@ const addBookForm = document.querySelector('#addBookForm');
 const submitBookBtn = document.querySelector('#submitBookBtn');
 
 addBookBtn.addEventListener('click', () => {
-    addBookForm.style.display = 'block';
+    addBookForm.style.display = 'flex';
 });
 
 submitBookBtn.addEventListener('click', (e) => {
