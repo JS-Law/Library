@@ -1,4 +1,22 @@
+class Book {
+    constructor(name, author, pages, status){
+        this.name = name;
+        this.author = author;
+        this.pages = pages;
+        this.status = status;
+    }
+}
 
+class ColumnElement{
+    constructor(container, textContent, row, column, marginStart) {
+        this.element = document.createElement('div');
+        this.element.textContent = textContent;
+        this.element.style.gridRow = row;
+        this.element.style.gridColumn = column;
+        this.element.style.marginInlineStart = marginStart;
+        container.appendChild(this.element)
+    }
+}
 // GLOBAL VARIABLES
 let library = [];
 let placeHolder = new Book("Example", "Jeff Stanley", "234", "Not Read Yet");
@@ -19,38 +37,18 @@ let colStatusStart = 12;
 
 let booksContainer = document.querySelector('#books');
 
-let colAuthor = document.createElement('div');
-colAuthor.textContent = "Author";
-colAuthor.style.gridRow = "1";
-colAuthor.style.gridColumn = "3";
-colAuthor.style.marginInlineStart = ".76rem"
-booksContainer.appendChild(colAuthor);
-
-let colTitle = document.createElement('div');
-colTitle.textContent = "Title";
-colTitle.style.gridRow = "1";
-colTitle.style.gridColumn = "6" 
-booksContainer.appendChild(colTitle);
-
-let colPageCount = document.createElement('div');
-colPageCount.textContent = 'PageCount'
-colPageCount.style.gridRow = '1'
-colPageCount.style.gridColumn = '9'
-booksContainer.appendChild(colPageCount)
-
-let colStatus = document.createElement('div');
-colStatus.textContent = 'Status';
-colStatus.style.gridRow = '1';
-colStatus.style.gridColumn = '13'
-booksContainer.appendChild(colStatus)
+let colAuthor = new ColumnElement(booksContainer, 'Author', '1', '3', '.76rem')
+let colTitle = new ColumnElement(booksContainer, 'colTitle', '1', '6')
+let colPageCount = new ColumnElement(booksContainer, 'colPageCount', '1', '9')
+let colStatus = new ColumnElement(booksContainer, 'colPageCount', '1', '13')
 
 
-function Book(name, author, pages, status){
-    this.name = name;
-    this.author = author;
-    this.pages = pages;
-    this.status = status;
-}
+// function Book(name, author, pages, status){
+//     this.name = name;
+//     this.author = author;
+//     this.pages = pages;
+//     this.status = status;
+// }
 
 
 function addBookToLibrary(book){
