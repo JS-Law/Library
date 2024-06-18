@@ -22,6 +22,12 @@ let library = [];
 let placeHolder = new Book("Example", "Jeff Stanley", "234", "Not Read Yet");
 let placeHolder2 = new Book("Another Example", "Jeff Stanley", "2342", "Read");
 
+// Need to find a way to increment these to inclue private variables
+// Increment function(?)
+// Increment function and then store in variable
+// Probably need to test in separate file
+
+
 let bookNum = 1;;
 let authorId = 1;
 let titleId = 1;
@@ -35,20 +41,12 @@ let colAuthorStart = 6;
 let colPageCountStart = 9;
 let colStatusStart = 12;
 
-let booksContainer = document.querySelector('#books');
 
+let booksContainer = document.querySelector('#books');
 let colAuthor = new ColumnElement(booksContainer, 'Author', '1', '3', '.76rem')
 let colTitle = new ColumnElement(booksContainer, 'colTitle', '1', '6')
 let colPageCount = new ColumnElement(booksContainer, 'colPageCount', '1', '9')
 let colStatus = new ColumnElement(booksContainer, 'colPageCount', '1', '13')
-
-
-// function Book(name, author, pages, status){
-//     this.name = name;
-//     this.author = author;
-//     this.pages = pages;
-//     this.status = status;
-// }
 
 
 function addBookToLibrary(book){
@@ -58,6 +56,70 @@ function addBookToLibrary(book){
 
 
 addBookToLibrary(placeHolder);
+
+// I can probably bake all of this into the same elementCreation class
+// constructor(container, textContent, row, column, marginStart) {
+// Create book class
+// Create Element methods
+// Book, Author, Title, Status, Remove Button, Icon Creation
+
+class Book {
+    constructor(bookTitle, bookNum, rowStart, authorId, titleId, pageCountId, statusId, removeBookBtnId){
+        this.bookTitle = bookTitle;
+        this.bookNum = bookNum;
+        this.rowStart = rowStart;
+        this.authorId = authorId;
+        this.titleId = titleId;
+        this.pageCountId = pageCountId;
+        this.statusId = statusId;
+        this.removeBookBtnId = removeBookBtnId;
+        this.newBook = this.createBookElement();
+        this.addElements();
+    }
+
+    createBookElement(){
+        let newBook = document.createElement('div');
+        newBook.className = 'book';
+        newBook.id = `book-${this.bookNum}`;
+        newBook.style.gridRow = this.rowStart;
+        newBook.style.gridColumn = '2 / 17';
+        newBook.style.display = 'grid';
+        newBook.style.gridTemplateColumns = 'repeat(16, 1fr';
+        return newBook;
+    }
+
+    createAuthorElement(){
+
+    }
+
+    createTitleElement(){
+
+    }
+
+    createPageCountElement(){
+
+    }
+
+    createStatusElement(){
+
+    }
+
+    createRemoveButton(){
+
+    }
+
+    createIconElement(){
+
+    }
+
+    addElements(){
+
+    }
+
+    appendTo(container){
+        container.appendChild(this.newBook);
+    }
+}
 
 
 library.forEach(bookTitle => {
