@@ -63,7 +63,7 @@ addBookToLibrary(placeHolder);
 // Create Element methods
 // Book, Author, Title, Status, Remove Button, Icon Creation
 
-class Book {
+class newBook {
     constructor(bookTitle, bookNum, rowStart, authorId, titleId, pageCountId, statusId, removeBookBtnId){
         this.bookTitle = bookTitle;
         this.bookNum = bookNum;
@@ -89,31 +89,69 @@ class Book {
     }
 
     createAuthorElement(){
-
+        let author = document.createElement('div');
+        author.className = 'author';
+        author.id = `author-${this.authorId++}`;
+        author.textContent = this.bookTitle.author;
+        author.style.gridColumn = '2 / 5';
+        author.style.gridRow = '1';
+        return author;
     }
-
+    
     createTitleElement(){
-
+        let title = document.createElement('title');
+        title.className = 'title';
+        title.id = `title-${this.titleId++}`;
+        title.textContent = this.bookTitle.name;
+        title.style.gridColumn = '5 / 7';
+        title.style.gridRow = '1';
+        return title;
     }
-
     createPageCountElement(){
-
+        let pageCount = document.createElement('div');
+        pageCount.className = 'page-count';
+        pageCount.id = `page-count-${this.pageCountId++}`;
+        pageCount.textContent = this.bookTitle.pages;
+        pageCount.style.gridColumn = '9 / 13'; // Span columns 8 to 11
+        pageCount.style.gridRow = '1'
+        return pageCount
     }
 
     createStatusElement(){
-
+        let status = document.createElement('div');
+        status.className = 'status';
+        status.id = `status-${this.statusId++}`;
+        status.textContent = this.bookTitle.status;
+        status.style.gridColumn = '13 / 16'; // Span columns 12 to 15
+        status.style.gridRow = '1'
+        return status
     }
 
     createRemoveButton(){
-
+        let removeBookBtn = document.createElement('button');
+        removeBookBtn.id = `Btn-${this.removeBookBtnId++}`;
+        removeBookBtn.className = 'removeButton';
+        removeBookBtn.textContent = "Remove Book";
+        removeBookBtn.style.gridColumn = '16 / 17';
+        removeBookBtn.onclick = () => this.newBook.remove(); 
     }
 
     createIconElement(){
-
+        let icon = document.createElement('img');
+        icon.src = 'assets/images/icons/bookIcon.png'; 
+        icon.alt = 'Book Icon';
+        icon.style.gridColumn = '1';
+        icon.style.gridRow = '1';
+        icon.style.width = '20px'; 
     }
 
     addElements(){
-
+        this.newBook.appendChild(this.createIconElement());
+        this.newBook.appendChild(this.createTitleElement());
+        this.newBook.appendChild(this.createAuthorElement());
+        this.newBook.appendChild(this.createPageCountElement());
+        this.newBook.appendChild(this.createStatusElement());
+        this.newBook.appendChild(this.createRemoveButton());
     }
 
     appendTo(container){
@@ -121,67 +159,19 @@ class Book {
     }
 }
 
-
 library.forEach(bookTitle => {
-    let newBook = document.createElement('div');
-    newBook.className = 'book';
-    newBook.id = `book-${bookNum++}`;
-    newBook.style.gridRow = rowStart++;
-    newBook.style.gridColumn = '2 / 17'; // Span full width of booksContainer
-    newBook.style.display = 'grid';
-    newBook.style.gridTemplateColumns = 'repeat(16, 1fr)'; // 16 columns within each book
-
-    let author = document.createElement('div');
-    author.className = 'author';
-    author.id = `author-${authorId++}`;
-    author.textContent = bookTitle.author;
-    author.style.gridColumn = '2 / 5'; // Span columns 1 to 3   
-    author.style.gridRow = '1'
-    
-    let title = document.createElement('div');
-    title.className = 'title';
-    title.id = `title-${titleId++}`;
-    title.textContent = bookTitle.name;
-    title.style.gridColumn = '5 / 7'; // Span columns 4 to 7
-    author.style.gridRow = '1'
-    
-    let pageCount = document.createElement('div');
-    pageCount.className = 'page-count';
-    pageCount.id = `page-count-${pageCountId++}`;
-    pageCount.textContent = bookTitle.pages;
-    pageCount.style.gridColumn = '9 / 13'; // Span columns 8 to 11
-    author.style.gridRow = '1'
-    
-    let status = document.createElement('div');
-    status.className = 'status';
-    status.id = `status-${statusId++}`;
-    status.textContent = bookTitle.status;
-    status.style.gridColumn = '13 / 16'; // Span columns 12 to 15
-    author.style.gridRow = '1'
-
-    let removeBookBtn = document.createElement('button');
-    removeBookBtn.id = `Btn-${removeBookBtnId++}`;
-    removeBookBtn.className = 'removeButton';
-    removeBookBtn.textContent = "Remove Book";
-    removeBookBtn.style.gridColumn = '16 / 17';
-    removeBookBtn.onclick = () => newBook.remove(); 
-    
-    let icon = document.createElement('img');
-    icon.src = 'assets/images/icons/bookIcon.png'; 
-    icon.alt = 'Book Icon';
-    icon.style.gridColumn = '1';
-    icon.style.gridRow = '1';
-    icon.style.width = '20px'; 
-
-    booksContainer.appendChild(newBook);
-    newBook.appendChild(title);
-    newBook.appendChild(author);
-    newBook.appendChild(pageCount);
-    newBook.appendChild(status);
-    newBook.appendChild(removeBookBtn);
-    newBook.appendChild(icon)
+    let book = new Book(
+        bookTitle,
+        bookNum++,
+        rowStart++,
+        authorId++,
+        titleId++,
+        pageCountId++,
+        statusId++,
+        removeBookBtnId++
+    );
+    book.appendTo(booksContainer);
 });
-
 
 const addBookBtn = document.querySelector('#add-new-book');
 const addBookForm = document.querySelector('#addBookForm');
